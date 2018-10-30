@@ -31,6 +31,7 @@ const AppScreen = {
     navigationOptions: () => ({
       title: `Home`,
       headerBackTitle: `Home`,
+      headerTintColor: '#fff',
       headerStyle: {
         backgroundColor: '#0097A7',
       }
