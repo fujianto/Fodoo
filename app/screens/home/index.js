@@ -27,8 +27,8 @@ class HomeScreen extends Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <Container>
+      <SafeAreaView style={{ flex: 1}}>
+        <Container style={{ backgroundColor: '#fafafa'}}> 
           <Content>
             <RestaurantCard />
           </Content>
