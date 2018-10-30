@@ -11,16 +11,19 @@ import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, SafeAreaView } from 'react-navigation';
 import { Container, Header, Tab, Tabs, ScrollableTab, H1, Body, Title } from 'native-base';
 
-import HomeScreen from './screens/home/home.js'
-import SplashScreen from './screens/splash/splash.js'
+import HomeScreen from './screens/home/'
+import SplashScreen from './screens/splash'
 
+import store from './store';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 export default class App extends React.Component {
   render() {
     return (
-      <AppNavigator />
+      <Provider store={store}>
+        <AppNavigator />
+      </Provider>
     );
   }
 }

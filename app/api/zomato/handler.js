@@ -1,9 +1,10 @@
 import { get, post, delete as axiosDelete } from 'axios';
 import {
-  SEARCH_ENDPOINT
+  SEARCH_ENDPOINT,
+  ZOMATO_API_KEY
 } from './endpoints';
 
-const headerAuth = { headers: { 'user-key': 'xxx' } };
+const headerAuth = { headers: { 'user-key': ZOMATO_API_KEY } };
 
 const getFeaturedRestaurant = () => {
   return get(`${SEARCH_ENDPOINT}`, headerAuth)
