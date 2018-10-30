@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
-import { Container, Header, Tab, Tabs, ScrollableTab, H1} from 'native-base';
+import { Platform, StyleSheet, View, Image } from 'react-native';
+import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
 import { SafeAreaView } from 'react-navigation';
 import Zomato from '../../api/zomato/handler';
 
 import { connect } from 'react-redux'
 import { getFeaturedRestaurants } from '../../actions/restaurant_actions'
+import { RestaurantCard } from '../../components/restaurant_card';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -17,17 +18,20 @@ class HomeScreen extends Component {
   }
 
   async componentDidMount() {
-    this.props.getFeaturedRestaurants();
+    // this.props.getFeaturedRestaurants();
+  }
+
+  renderFeaturedRestaurants() {
+
   }
 
   render() {
-    console.log(this.props.restaurants);
-    
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <Container>
-          <H1>HOME</H1> 
-
+          <Content>
+            <RestaurantCard />
+          </Content>
         </Container>
       </SafeAreaView>
     )
