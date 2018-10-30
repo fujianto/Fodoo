@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, View } from 'react-native';
 import { Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, H3 } from 'native-base';
+import FullWidthImage from 'react-native-fullwidth-image'
 
 const Styles = {
   featuredWrapper: { 
@@ -20,12 +20,8 @@ export const RestaurantCard = (props) => {
     <Card style={{ flex: 0 }}>
       <CardItem>
         <Body>
-          <View styles={{ position: 'relative', height: 150, flex: 1}}>
-            <Image resizeMode="cover" style={{
-              position: 'absolute', 
-              height: 200, width: 200, flex: 1
-            }} source={{ uri: 'http://naisinpo.com/wp-content/uploads/2018/04/IMG-20180419-WA0000-150x150.jpg' }} />
-          </View>
+          <FullWidthImage ratio={3 / 4} source={{ uri: 'http://naisinpo.com/wp-content/uploads/2018/04/IMG-20180419-WA0000-150x150.jpg' }} />
+
           <H3>Name of Restaurant</H3>
         </Body>
       </CardItem>
