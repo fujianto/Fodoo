@@ -6,7 +6,7 @@ import Zomato from '../../api/zomato/handler';
 
 import { connect } from 'react-redux'
 import { getFeaturedRestaurants } from '../../actions/restaurant_actions'
-import { RestaurantCard } from '../../components/restaurant_card';
+import RestaurantCard from '../../components/restaurant_card';
 
 class HomeScreen extends Component {
   constructor(props) {

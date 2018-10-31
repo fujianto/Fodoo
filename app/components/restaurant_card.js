@@ -1,64 +1,81 @@
 import React from 'react';
-import { Image, View, Text } from 'react-native';
-import { Card, CardItem, Thumbnail, Button, Icon, Left, Body, H3, H4 } from 'native-base';
+import { Image, View } from 'react-native';
 import FullWidthImage from 'react-native-fullwidth-image';
-import styled, { css } from 'styled-components'
+import { Body, Badge, Text } from 'native-base';
+import PropTypes from 'prop-types';
+import {
+  RCard,
+  RCardItem,
+  RFeaturedWrapper,
+  RTitleWrapper,
+  RTitle,
+  RSubtitle,
+  RInfoWrapper,
+  RType,
+  RSubtitleWrapper
+} from './restaurant_card.styles';
 
-const RCard = styled(Card)`
-  borderRadius: 10;
-  flex: 0;
-`;
+const RestaurantCard = (props) => {
+  const {
+    image,
+    title,
+    location,
+    rating,
+    cuisines,
+    average_cost_for_two,
+    currency
+  } = props;
 
-const RCardItem = styled(CardItem) `
-  borderBottomStartRadius: 5;
-  borderBottomEndRadius: 5;
-`;
+  let success = +rating >= 4 ? true : false;
+  let warning = +rating < 4 && +rating > 3 ? true : false;
+  let danger = +rating <= 3 ? true : false;
 
-const RFeaturedWrapper = styled.View`
-  position: relative;
-`;
-
-const RTitleWrapper = styled.View`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  padding: 10px 15px;
-  alignContent: space-around;
-  justifyContent: center;
-  flexDirection: row;
-`;
-
-const RTitle = styled(H3)`
-  color: #fff;
-  fontWeight: bold;
-  width: 70%;
-`;
-
-const RSubtitle = styled(H3) `
-  textAlign: right;
-  color: #fff;
-  width: 30%;
-  fontSize: 15px;
-`;
-
-export const RestaurantCard = (props) => {
   return (
     <RCard>
       <RFeaturedWrapper>
-        <FullWidthImage ratio={3 / 4} source={{ uri: 'http://naisinpo.com/wp-content/uploads/2018/04/IMG-20180419-WA0000-150x150.jpg' }} />
+        <FullWidthImage ratio={3/4} source={{ uri: image }} />
+        <RInfoWrapper>
+          <RType>{ cuisines }</RType>
+        </RInfoWrapper>
+        
         <RTitleWrapper>
-          <RTitle>Star Box</RTitle>
-          <RSubtitle>Tue 7th 22H</RSubtitle>
+          <RTitle>{ title } </RTitle>
+          <RSubtitleWrapper>
+            <Badge style={{ alignSelf: 'flex-end', width: 30, height: 30 }} success={success} warning={warning} danger={danger}>
+              <RSubtitle>{rating}</RSubtitle>
+            </Badge>
+          </RSubtitleWrapper>
         </RTitleWrapper>
       </RFeaturedWrapper>
 
       <RCardItem>
         <Body>
-          <H3>Bogor, Bogor Utara, Indonesia</H3>
+          <Text>{ location }</Text>
+          <Text>{currency} {average_cost_for_two} for two</Text>
         </Body>
       </RCardItem>
     </RCard>
   );
 }
+
+RestaurantCard.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string,
+  location: PropTypes.string,
+  rating: PropTypes.string,
+  cuisines: PropTypes.string,
+  average_cost_for_two: PropTypes.string,
+  currency: PropTypes.string
+}
+
+RestaurantCard.defaultProps = {
+  image: 'https://dummyimage.com/266x138/000/fff',
+  title: 'Jakarta Delights',
+  location: 'Jakarta Barat, DKI Jakarta, Indonesia',
+  rating: '4.5',
+  cuisines: 'Cafe',
+  average_cost_for_two: '50',
+  currency: '$'
+};
+
+export default RestaurantCard;

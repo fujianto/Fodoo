@@ -9,9 +9,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "native-base": "^2.8.1",
+    "prop-types": "^15.6.2",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.3",
     "react-native-fullwidth-image": "^0.1.2",
+    "react-native-languages": "^3.0.1",
     "react-navigation": "^2.18.0",
     "react-redux": "^5.0.7",
     "realm": "^2.18.0",
