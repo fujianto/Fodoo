@@ -9,7 +9,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, SafeAreaView } from 'react-navigation';
-import { Container, Header, Tab, Tabs, ScrollableTab, H1, Body, Title } from 'native-base';
+import { Root} from 'native-base';
 
 import HomeScreen from './screens/home/'
 import SplashScreen from './screens/splash'
@@ -22,7 +22,9 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <AppNavigator />
+        <Root>
+          <AppNavigator />
+        </Root>
       </Provider>
     );
   }
