@@ -12,7 +12,9 @@ import {
   RSubtitle,
   RInfoWrapper,
   RType,
-  RSubtitleWrapper
+  RSubtitleWrapper,
+  RBeforeInfo,
+  RAfterInfo
 } from './restaurant_card.styles';
 
 const RestaurantCard = (props) => {
@@ -35,7 +37,9 @@ const RestaurantCard = (props) => {
       <RFeaturedWrapper>
         <FullWidthImage ratio={3/4} source={{ uri: image }} />
         <RInfoWrapper>
+          <RBeforeInfo></RBeforeInfo>
           <RType>{ cuisines }</RType>
+          <RAfterInfo></RAfterInfo>
         </RInfoWrapper>
         
         <RTitleWrapper>
@@ -73,7 +77,7 @@ RestaurantCard.defaultProps = {
   title: 'Jakarta Delights',
   location: 'Jakarta Barat, DKI Jakarta, Indonesia',
   rating: '4.5',
-  cuisines: 'Cafe',
+  cuisines: 'Restaurant',
   average_cost_for_two: '50',
   currency: '$'
 };

@@ -49,9 +49,43 @@ export const RInfoWrapper = styled.View`
   position: absolute;
   left: 0;
   top: 0;
-  padding: 10px 20px;
+  padding: 10px 20px 0px 0px;
   width: 40%;
   backgroundColor: rgba(255, 0, 0, 0.7);
+`;
+
+export const RBeforeInfo = styled.View`
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  width: 0;
+  height: 0;
+  borderStyle: solid;
+  borderTopWidth: 10px;
+  borderRightWidth: 75px;
+  borderBottomWidth: 10px;
+  borderLeftWidth: 75px;
+  borderTopColor: rgba(255, 0, 0, 0.7); 
+  borderRightColor: transparent;
+  borderBottomColor: transparent;
+  borderLeftColor: rgba(255, 0, 0, 0.7);
+`;
+
+export const RAfterInfo = styled.View`
+  position: absolute;
+  bottom: 0px;
+  right: -32px;
+  width: 0;
+  height: 0;
+  borderStyle: solid;
+  borderTopWidth: 16px;
+  borderRightWidth: 16px;
+  borderBottomWidth: 16px;
+  borderLeftWidth: 16px;
+  borderTopColor: rgba(255, 0, 0, 0.7); 
+  borderRightColor: transparent;
+  borderBottomColor: transparent;
+  borderLeftColor: rgba(255, 0, 0, 0.7);
 `;
 
 export const RType = styled(H3)`
