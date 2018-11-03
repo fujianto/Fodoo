@@ -18,7 +18,22 @@ import store from './store';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
+import RNLanguages from 'react-native-languages';
+import i18n from './i18n';
+
 export default class App extends React.Component {
+  componentDidMount() {
+    RNLanguages.addEventListener('change', this._onLanguagesChange);
+  }
+
+  componentWillUnmount() {
+    RNLanguages.removeEventListener('change', this._onLanguagesChange);
+  }
+
+  _onLanguagesChange = ({ language }) => {
+    i18n.locale = language;
+  };
+
   render() {
     return (
       <Provider store={store}>
@@ -34,8 +49,8 @@ const AppScreen = {
   Home: {
     screen: HomeScreen,
     navigationOptions: () => ({
-      title: `Home`,
-      headerBackTitle: `Home`,
+      title: i18n.t('header_title_home'),
+      headerBackTitle: i18n.t('header_title_home'),
       headerTintColor: '#fff',
       headerStyle: {
         backgroundColor: '#0097A7',
