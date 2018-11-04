@@ -26,7 +26,7 @@ const RestaurantCard = (props) => {
     cuisines,
     average_cost_for_two,
     currency
-  } = props;
+  } = props.item;
 
   let success = +rating >= 4 ? true : false;
   let warning = +rating < 4 && +rating > 3 ? true : false;
@@ -63,23 +63,27 @@ const RestaurantCard = (props) => {
 }
 
 RestaurantCard.propTypes = {
-  image: PropTypes.string,
-  title: PropTypes.string,
-  location: PropTypes.string,
-  rating: PropTypes.string,
-  cuisines: PropTypes.string,
-  average_cost_for_two: PropTypes.string,
-  currency: PropTypes.string
+  item: PropTypes.shape({
+    image: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    location: PropTypes.string,
+    rating: PropTypes.string,
+    cuisines: PropTypes.string,
+    average_cost_for_two: PropTypes.string,
+    currency: PropTypes.string
+  })
 }
 
 RestaurantCard.defaultProps = {
-  image: 'https://dummyimage.com/266x138/000/fff',
-  title: 'Jakarta Delights',
-  location: 'Jakarta Barat, DKI Jakarta, Indonesia',
-  rating: '4.5',
-  cuisines: 'Restaurant',
-  average_cost_for_two: '50',
-  currency: '$'
-};
+  item: {
+    image: 'https://dummyimage.com/266x138/000/fff',
+    title: 'Jakarta Delights',
+    location: 'Jakarta Barat, DKI Jakarta, Indonesia',
+    rating: '4.5',
+    cuisines: 'Restaurant',
+    average_cost_for_two: '50',
+    currency: '$'
+  }
+}
 
 export default RestaurantCard;
