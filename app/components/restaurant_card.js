@@ -1,9 +1,10 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 import FullWidthImage from 'react-native-fullwidth-image';
-import { Body, Badge, Text } from 'native-base';
+import { Body, Badge, Text, Icon, Button } from 'native-base';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
+import i18n from '../i18n';
 import {
   RCard,
   RCardItem,
@@ -110,9 +111,12 @@ const RestaurantCard = (props) => {
       </RFeaturedWrapper>
 
       <RCardItem>
-        <Body>
+        <Body style={{ position: 'relative' }}>
           <Text>{ location }</Text>
-          <Text>{currency} {average_cost_for_two} for two</Text>
+          <Button rounded warning style={{ position: 'absolute', right: 0, top: -4 }}>
+            <Icon name='add' style={{fontSize: 30}}/>
+          </Button>
+          <Text>{currency} {average_cost_for_two} {i18n.t('label_for_two')}</Text>
         </Body>
       </RCardItem>
     </RCard>
