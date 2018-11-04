@@ -3,6 +3,7 @@ import { Image, View } from 'react-native';
 import FullWidthImage from 'react-native-fullwidth-image';
 import { Body, Badge, Text } from 'native-base';
 import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components'
 import {
   RCard,
   RCardItem,
@@ -10,11 +11,8 @@ import {
   RTitleWrapper,
   RTitle,
   RSubtitle,
-  RInfoWrapper,
   RType,
   RSubtitleWrapper,
-  RBeforeInfo,
-  RAfterInfo
 } from './restaurant_card.styles';
 
 const RestaurantCard = (props) => {
@@ -28,9 +26,68 @@ const RestaurantCard = (props) => {
     currency
   } = props.item;
 
-  let success = +rating >= 4 ? true : false;
-  let warning = +rating < 4 && +rating > 3 ? true : false;
-  let danger = +rating <= 3 ? true : false;
+  const getRatingColor = (rating) => {
+    if (+rating >= 4) {
+      return 'rgba(40, 167, 69, 0.7)';
+    }
+    
+    if (+rating < 4 && +rating > 3 >= 4) {
+      return 'rgba(232, 176, 8, 0.7)';
+    }
+    
+    if (+rating <= 3) {
+      return 'rgba(255, 0, 0, 0.7)';
+    }
+
+    return 'rgba(40, 167, 69, 0.7)';
+  }
+
+  const RInfoWrapper = styled.View`
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 10px 20px 0px 0px;
+    width: 40%;
+    backgroundColor: ${getRatingColor(rating)};
+  `;
+
+  const RBeforeInfo = styled.View`
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 0;
+    height: 0;
+    borderStyle: solid;
+    borderTopWidth: 10px;
+    borderRightWidth: 75px;
+    borderBottomWidth: 10px;
+    borderLeftWidth: 75px;
+    borderTopColor: ${getRatingColor(rating)}; 
+    borderRightColor: transparent;
+    borderBottomColor: transparent;
+    borderLeftColor: ${getRatingColor(rating)};
+  `;
+
+  const RAfterInfo = styled.View`
+    position: absolute;
+    bottom: 0px;
+    right: -32px;
+    width: 0;
+    height: 0;
+    borderStyle: solid;
+    borderTopWidth: 16px;
+    borderRightWidth: 16px;
+    borderBottomWidth: 16px;
+    borderLeftWidth: 16px;
+    borderTopColor: ${getRatingColor(rating)}; 
+    borderRightColor: transparent;
+    borderBottomColor: transparent;
+    borderLeftColor: ${getRatingColor(rating)};
+  `;
+
+  const success = +rating >= 4 ? true : false;
+  const warning = +rating < 4 && +rating > 3 ? true : false;
+  const danger = +rating <= 3 ? true : false;
 
   return (
     <RCard>
@@ -43,9 +100,9 @@ const RestaurantCard = (props) => {
         </RInfoWrapper>
         
         <RTitleWrapper>
-          <RTitle>{ title } </RTitle>
+          <RTitle>{title}</RTitle>
           <RSubtitleWrapper>
-            <Badge style={{ alignSelf: 'flex-end', width: 30, height: 30 }} success={success} warning={warning} danger={danger}>
+            <Badge style={{ alignSelf: 'flex-end', minWidth: 30, minHeight: 30}} success={success} warning={warning} danger={danger}>
               <RSubtitle>{rating}</RSubtitle>
             </Badge>
           </RSubtitleWrapper>
@@ -79,7 +136,7 @@ RestaurantCard.defaultProps = {
     image: 'https://dummyimage.com/266x138/000/fff',
     title: 'Jakarta Delights',
     location: 'Jakarta Barat, DKI Jakarta, Indonesia',
-    rating: '4.5',
+    rating: '4',
     cuisines: 'Restaurant',
     average_cost_for_two: '50',
     currency: '$'
