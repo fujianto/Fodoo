@@ -91,41 +91,43 @@ const RestaurantCard = (props) => {
   const danger = +rating <= 3 ? true : false;
 
   return (
-    <RCard>
-      <RFeaturedWrapper>
-        <FullWidthImage ratio={3/4} source={{ uri: image }} />
-        <RInfoWrapper>
-          <RBeforeInfo></RBeforeInfo>
-          <RType>{ cuisines }</RType>
-          <RAfterInfo></RAfterInfo>
-        </RInfoWrapper>
-          
-        <View style={{ position: 'absolute', right: 20, top: 20}}>
-          <TouchableHighlight onPress={() => alert('Liked')} iconLeft danger>
-            <Icon name='md-heart' style={{ color: '#fff' }}/>
-          </TouchableHighlight>
-        </View>
+    <TouchableHighlight onPress={() => alert('Clicked')}>
+      <RCard>
+        <RFeaturedWrapper>
+          <FullWidthImage ratio={3/4} source={{ uri: image }} />
+          <RInfoWrapper>
+            <RBeforeInfo></RBeforeInfo>
+            <RType>{ cuisines }</RType>
+            <RAfterInfo></RAfterInfo>
+          </RInfoWrapper>
+            
+          <View style={{ position: 'absolute', right: 15, top: 20}}>
+            <TouchableHighlight onPress={() => alert('Liked')}>
+              <Icon name='md-heart' style={{ color: '#fff' }}/>
+            </TouchableHighlight>
+          </View>
 
-        <RTitleWrapper>
-          <RTitle>{title}</RTitle>
-          <RSubtitleWrapper>
-            <Badge style={{ alignSelf: 'flex-end', minWidth: 30, minHeight: 30}} success={success} warning={warning} danger={danger}>
-              <RSubtitle>{rating}</RSubtitle>
-            </Badge>
-          </RSubtitleWrapper>
-        </RTitleWrapper>
-      </RFeaturedWrapper>
+          <RTitleWrapper>
+            <RTitle>{title}</RTitle>
+            <RSubtitleWrapper>
+              <Badge style={{ alignSelf: 'flex-end', minWidth: 30, minHeight: 30}} success={success} warning={warning} danger={danger}>
+                <RSubtitle>{rating}</RSubtitle>
+              </Badge>
+            </RSubtitleWrapper>
+          </RTitleWrapper>
+        </RFeaturedWrapper>
 
-      <RCardItem>
-        <Body style={{ position: 'relative' }}>
-          <Text>{ location }</Text>
-          <Button onPress={() => alert('Added')} rounded warning style={{ position: 'absolute', right: 0, top: -4 }}>
-            <Icon name='add' style={{fontSize: 30}}/>
-          </Button>
-          <Text>{currency} {average_cost_for_two} {i18n.t('label_for_two')}</Text>
-        </Body>
-      </RCardItem>
-    </RCard>
+        <RCardItem>
+          <Body style={{ position: 'relative' }}>
+            <Text>{ location }</Text>
+            <Button onPress={() => alert('Added')} rounded warning style={{ position: 'absolute', right: -4, top: -4 }}>
+              <Icon name='add' style={{fontSize: 30}}/>
+            </Button>
+            <Text>{currency} {average_cost_for_two} {i18n.t('label_for_two')}</Text>
+          </Body>
+        </RCardItem>
+      </RCard>
+    </TouchableHighlight>
   );
 }
 
