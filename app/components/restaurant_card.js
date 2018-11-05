@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image, View, TouchableHighlight } from 'react-native';
 import FullWidthImage from 'react-native-fullwidth-image';
 import { Body, Badge, Text, Icon, Button } from 'native-base';
 import PropTypes from 'prop-types';
@@ -99,7 +99,13 @@ const RestaurantCard = (props) => {
           <RType>{ cuisines }</RType>
           <RAfterInfo></RAfterInfo>
         </RInfoWrapper>
-        
+          
+        <View style={{ position: 'absolute', right: 20, top: 20}}>
+          <TouchableHighlight onPress={() => alert('Liked')} iconLeft danger>
+            <Icon name='md-heart' style={{ color: '#fff' }}/>
+          </TouchableHighlight>
+        </View>
+
         <RTitleWrapper>
           <RTitle>{title}</RTitle>
           <RSubtitleWrapper>
@@ -113,7 +119,7 @@ const RestaurantCard = (props) => {
       <RCardItem>
         <Body style={{ position: 'relative' }}>
           <Text>{ location }</Text>
-          <Button rounded warning style={{ position: 'absolute', right: 0, top: -4 }}>
+          <Button onPress={() => alert('Added')} rounded warning style={{ position: 'absolute', right: 0, top: -4 }}>
             <Icon name='add' style={{fontSize: 30}}/>
           </Button>
           <Text>{currency} {average_cost_for_two} {i18n.t('label_for_two')}</Text>
