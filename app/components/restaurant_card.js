@@ -19,92 +19,106 @@ import {
   RAfterInfo
 } from "./restaurant_card.styles";
 
-const RestaurantCard = (props) => {
-  const {
-    id,
-    image,
-    name,
-    location,
-    city,
-    rating,
-    cuisines,
-    cost,
-    currency
-  } = props.item;
+class RestaurantCard extends React.PureComponent {
+  state = {
+    isLiked: false
+  }
 
-  const getRatingColor = (rating) => {
-    if (+rating >= 4) {
+  render() {
+    const {
+      props
+    } = this;
+
+    const {
+      id,
+      image,
+      name,
+      location,
+      city,
+      rating,
+      cuisines,
+      cost,
+      currency
+    } = props.item;
+
+    getRatingColor = (rating) => {
+      if (+rating >= 4) {
+        return 'rgba(40, 167, 69, 0.7)';
+      }
+      
+      if (+rating < 4 && +rating > 3 >= 4) {
+        return 'rgba(232, 176, 8, 0.7)';
+      }
+      
+      if (+rating <= 3) {
+        return 'rgba(255, 0, 0, 0.7)';
+      }
+
       return 'rgba(40, 167, 69, 0.7)';
     }
-    
-    if (+rating < 4 && +rating > 3 >= 4) {
-      return 'rgba(232, 176, 8, 0.7)';
-    }
-    
-    if (+rating <= 3) {
-      return 'rgba(255, 0, 0, 0.7)';
+
+    onItemPress = id => {
+      alert("Press: " + id);
     }
 
-    return 'rgba(40, 167, 69, 0.7)';
+    onLike = id => {
+      this.setState((prevState, nextProps) => {
+        return {
+          isLiked: !prevState.isLiked
+        }
+      })
+    }
+
+    onAddBackpack = id => {
+      alert("ADD: " + id);
+    };
+
+    const success = +rating >= 4 ? true : false;
+    const warning = +rating < 4 && +rating > 3 ? true : false;
+    const danger = +rating <= 3 ? true : false;
+
+    return <TouchableHighlight onPress={() => onItemPress(id)}>
+        <RCard>
+          <RFeaturedWrapper>
+            <FullWidthImage ratio={3 / 4} source={{ uri: image }} />
+            <RInfoWrapper bgColor={getRatingColor(rating)}>
+              <RBeforeInfo bgColor={getRatingColor(rating)} />
+              <RType>{cuisines}</RType>
+              <RAfterInfo bgColor={getRatingColor(rating)} />
+            </RInfoWrapper>
+
+            <View style={{ position: "absolute", right: 15, top: 20 }}>
+              <TouchableHighlight onPress={() => onLike(id)}>
+                <Icon name="md-heart" style={{ color: this.state.isLiked ? "crimson" : "#fff" }} />
+              </TouchableHighlight>
+            </View>
+
+            <RTitleWrapper>
+              <RTitle>{name}</RTitle>
+              <RSubtitleWrapper>
+                <Badge style={{ alignSelf: "flex-end", minWidth: 30, minHeight: 30 }} success={success} warning={warning} danger={danger}>
+                  <RSubtitle>{rating}</RSubtitle>
+                </Badge>
+              </RSubtitleWrapper>
+            </RTitleWrapper>
+          </RFeaturedWrapper>
+
+          <RCardItem>
+            <Body style={{ position: "relative" }}>
+              <Text>
+                {location}, {city}
+              </Text>
+              <Button onPress={() => onAddBackpack(id)} rounded warning style={{ position: "absolute", right: -4, top: -4 }}>
+                <Icon name="add" style={{ fontSize: 30 }} />
+              </Button>
+              <Text>
+                {currency} {cost} {i18n.t("label_for_two")}
+              </Text>
+            </Body>
+          </RCardItem>
+        </RCard>
+      </TouchableHighlight>;
   }
-
-  const onItemPress = id => {
-    alert("Press: " + id);
-  }
-
-  const onLike = id => {
-    alert("LIKE: "+id);
-  }
-
-  const onAddBackpack = id => {
-    alert("ADD: " + id);
-  };
-
-  const success = +rating >= 4 ? true : false;
-  const warning = +rating < 4 && +rating > 3 ? true : false;
-  const danger = +rating <= 3 ? true : false;
-
-  return <TouchableHighlight onPress={() => onItemPress(id)}>
-      <RCard>
-        <RFeaturedWrapper>
-          <FullWidthImage ratio={3 / 4} source={{ uri: image }} />
-          <RInfoWrapper bgColor={getRatingColor(rating)}>
-            <RBeforeInfo bgColor={getRatingColor(rating)} />
-            <RType>{cuisines}</RType>
-            <RAfterInfo bgColor={getRatingColor(rating)} />
-          </RInfoWrapper>
-
-          <View style={{ position: "absolute", right: 15, top: 20 }}>
-            <TouchableHighlight onPress={() => onLike(id)}>
-              <Icon name="md-heart" style={{ color: "#fff" }} />
-            </TouchableHighlight>
-          </View>
-
-          <RTitleWrapper>
-            <RTitle>{name}</RTitle>
-            <RSubtitleWrapper>
-              <Badge style={{ alignSelf: "flex-end", minWidth: 30, minHeight: 30 }} success={success} warning={warning} danger={danger}>
-                <RSubtitle>{rating}</RSubtitle>
-              </Badge>
-            </RSubtitleWrapper>
-          </RTitleWrapper>
-        </RFeaturedWrapper>
-
-        <RCardItem>
-          <Body style={{ position: "relative" }}>
-            <Text>
-              {location}, {city}
-            </Text>
-            <Button onPress={() => onAddBackpack(id)} rounded warning style={{ position: "absolute", right: -4, top: -4 }}>
-              <Icon name="add" style={{ fontSize: 30 }} />
-            </Button>
-            <Text>
-              {currency} {cost} {i18n.t("label_for_two")}
-            </Text>
-          </Body>
-        </RCardItem>
-      </RCard>
-    </TouchableHighlight>;
 }
 
 RestaurantCard.propTypes = {
