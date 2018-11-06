@@ -96,9 +96,9 @@ class RestaurantCard extends React.PureComponent {
             <RTitleWrapper>
               <RTitle>{name}</RTitle>
               <RSubtitleWrapper>
-                <Badge style={{ alignSelf: "flex-end", minWidth: 30, minHeight: 30 }} success={success} warning={warning} danger={danger}>
+                <View style={{ alignSelf: 'flex-end', justifyContent:'center', backgroundColor: `${getRatingColor(rating)}`, borderRadius: 50, width: 30, height: 30 }}>
                   <RSubtitle>{rating}</RSubtitle>
-                </Badge>
+                </View>
               </RSubtitleWrapper>
             </RTitleWrapper>
           </RFeaturedWrapper>
@@ -142,7 +142,7 @@ RestaurantCard.defaultProps = {
     name: 'Jakarta Delights',
     location: 'Jakarta Barat',
     city: 'DKI Jakarta',
-    rating: '4',
+    rating: '4.5',
     cuisines: 'Restaurant',
     cost: '50',
     currency: '$'

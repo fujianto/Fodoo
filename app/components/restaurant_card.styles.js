@@ -35,10 +35,11 @@ export const RTitle = styled(H3) `
   width: 70%;
 `;
 
-export const RSubtitle = styled(H3) `
+export const RSubtitle = styled.Text `
   color: #fff;
   fontWeight: bold;
   fontSize: 11px;
+  margin: 0;
   text-align: center;
 `;
 
