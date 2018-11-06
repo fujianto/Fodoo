@@ -21,6 +21,7 @@ import {
 
 const RestaurantCard = (props) => {
   const {
+    id,
     image,
     name,
     location,
@@ -47,11 +48,23 @@ const RestaurantCard = (props) => {
     return 'rgba(40, 167, 69, 0.7)';
   }
 
+  const onItemPress = id => {
+    alert("Press: " + id);
+  }
+
+  const onLike = id => {
+    alert("LIKE: "+id);
+  }
+
+  const onAddBackpack = id => {
+    alert("ADD: " + id);
+  };
+
   const success = +rating >= 4 ? true : false;
   const warning = +rating < 4 && +rating > 3 ? true : false;
   const danger = +rating <= 3 ? true : false;
 
-  return <TouchableHighlight onPress={props.onItemPress}>
+  return <TouchableHighlight onPress={() => onItemPress(id)}>
       <RCard>
         <RFeaturedWrapper>
           <FullWidthImage ratio={3 / 4} source={{ uri: image }} />
@@ -62,7 +75,7 @@ const RestaurantCard = (props) => {
           </RInfoWrapper>
 
           <View style={{ position: "absolute", right: 15, top: 20 }}>
-            <TouchableHighlight onPress={props.onLike}>
+            <TouchableHighlight onPress={() => onLike(id)}>
               <Icon name="md-heart" style={{ color: "#fff" }} />
             </TouchableHighlight>
           </View>
@@ -82,7 +95,7 @@ const RestaurantCard = (props) => {
             <Text>
               {location}, {city}
             </Text>
-            <Button onPress={props.onAddBackpack} rounded warning style={{ position: "absolute", right: -4, top: -4 }}>
+            <Button onPress={() => onAddBackpack(id)} rounded warning style={{ position: "absolute", right: -4, top: -4 }}>
               <Icon name="add" style={{ fontSize: 30 }} />
             </Button>
             <Text>
@@ -96,6 +109,7 @@ const RestaurantCard = (props) => {
 
 RestaurantCard.propTypes = {
   item: PropTypes.shape({
+    id: PropTypes.string,
     image: PropTypes.string,
     name: PropTypes.string.isRequired,
     location: PropTypes.string,
@@ -104,14 +118,12 @@ RestaurantCard.propTypes = {
     cuisines: PropTypes.string,
     cost: PropTypes.string,
     currency: PropTypes.string
-  }),
-  onItemPress: PropTypes.func,
-  onLike: PropTypes.func,
-  onAddBackpack: PropTypes.func
+  })
 };
 
 RestaurantCard.defaultProps = {
   item: {
+    id: '1',
     image: 'https://dummyimage.com/266x138/000/fff',
     name: 'Jakarta Delights',
     location: 'Jakarta Barat',
@@ -120,15 +132,6 @@ RestaurantCard.defaultProps = {
     cuisines: 'Restaurant',
     cost: '50',
     currency: '$'
-  },
-  onItemPress: () => {
-    alert('onItemPress')
-  },
-  onLike: () => {
-    alert('onLike')
-  },
-  onAddBackpack: () => {
-    alert('onAddBackpack')
   }
 }
 
