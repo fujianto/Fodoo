@@ -9,14 +9,16 @@ export const ZomatoRestaurantSearch = ({ restaurants: data }) => {
         user_rating: { aggregate_rating: ratingDt },
         cuisines,
         average_cost_for_two,
-        currency
+        currency,
+        thumb,
+        photos_url
       }
     }) => {
       return {
         id,
-        image: featured_image,
+        image: featured_image || thumb,
         name,
-        locality,
+        locality: locDt,
         location: locvDt,
         city: cityDt,
         rating: ratingDt,
