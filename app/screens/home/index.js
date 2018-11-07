@@ -17,8 +17,8 @@ class HomeScreen extends Component {
     alert("Tab Clicked");
   }
 
-  async componentDidMount() {
-    // this.props.getFeaturedRestaurants();
+  componentDidMount() {
+    this.props.getFeaturedRestaurants();
   }
 
   renderFeaturedRestaurants() {
