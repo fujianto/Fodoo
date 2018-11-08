@@ -118,7 +118,7 @@ class RestaurantCard extends React.PureComponent {
               <Text>
                 {location}, {city}
               </Text>
-              <Button onPress={() => onAddBackpack(id)} rounded warning style={{ position: "absolute", right: -4, top: -4 }}>
+              <Button onPress={() => this.onAddBackpack(id)} rounded warning style={{ position: "absolute", right: -4, top: -4 }}>
                 <Icon name="add" style={{ fontSize: 30 }} />
               </Button>
               <Text>

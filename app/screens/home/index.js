@@ -7,7 +7,7 @@ import Zomato from '../../api/zomato/handler';
 import { connect } from 'react-redux'
 import { getFeaturedRestaurants } from '../../actions/restaurant_actions'
 import RestaurantCard from '../../components/restaurant_card';
-FlatList
+
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
@@ -21,43 +21,32 @@ class HomeScreen extends Component {
     this.props.getFeaturedRestaurants();
   }
 
-  renderFeaturedRestaurant = ({ item }) => {
+  _renderFeaturedRestaurant = ({ item }) => {
     return <RestaurantCard item={item} />;
-  }
+  };
+
+  _keyExtractor = (item, index) => `${item.id}-${item.name}`;
 
   render() {
-    return <SafeAreaView style={{ flex: 1 }}>
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
         <Container style={{ backgroundColor: "#fafafa" }}>
           <Content>
             {this.props.restaurants.meta.status === "loading" ? (
-              <Text style={{ flex: 1, alignSelf: 'center' }}>Loading...</Text>
+              <Text style={{ flex: 1, alignSelf: "center" }}>Loading...</Text>
             ) : (
               <FlatList
                 data={this.props.restaurants.data}
-                keyExtractor={(item, index) => `${item.id}-${item.name}`}
-                renderItem={this.renderFeaturedRestaurant}
+                keyExtractor={this._keyExtractor}
+                renderItem={this._renderFeaturedRestaurant}
               />
             )}
           </Content>
         </Container>
-      </SafeAreaView>;
+      </SafeAreaView>
+    );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ecf0f1',
-    justifyContent: 'space-between',
-    // justifyContent: 'center',
-  },
-  paragraph: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
-  },
-});
 
 const mapStateToProps = (state) => {
   return {
