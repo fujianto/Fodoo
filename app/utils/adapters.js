@@ -15,12 +15,12 @@ export const ZomatoRestaurantSearch = ({ restaurants: data }) => {
     }) => {
       return {
         id,
-        image: featured_image || thumb,
+        image: featured_image || thumb || 'https://dummyimage.com/266x138/000/fff',
         name,
         locality: locDt,
         location: locvDt,
         city: cityDt,
-        rating: ratingDt,
+        rating: `${ratingDt}`,
         cuisines,
         cost: `${average_cost_for_two}`,
         currency

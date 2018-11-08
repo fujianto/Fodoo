@@ -29,11 +29,15 @@ class HomeScreen extends Component {
     return <SafeAreaView style={{ flex: 1 }}>
         <Container style={{ backgroundColor: "#fafafa" }}>
           <Content>
-          {
-            this.props.restaurants.meta.status === "loading" ? 
-              <Text>Loading...</Text> : 
-              <FlatList data={this.props.restaurants.data} keyExtractor={(item, index) => `${item.id}-${item.name}`} renderItem={this.renderFeaturedRestaurant} />
-          }
+            {this.props.restaurants.meta.status === "loading" ? (
+              <Text style={{ flex: 1, alignSelf: 'center' }}>Loading...</Text>
+            ) : (
+              <FlatList
+                data={this.props.restaurants.data}
+                keyExtractor={(item, index) => `${item.id}-${item.name}`}
+                renderItem={this.renderFeaturedRestaurant}
+              />
+            )}
           </Content>
         </Container>
       </SafeAreaView>;

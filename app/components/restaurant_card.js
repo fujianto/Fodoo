@@ -22,12 +22,50 @@ import {
 class RestaurantCard extends React.PureComponent {
   state = {
     isLiked: false
+  };
+
+  getRatingColor = rating => {
+    if (+rating >= 4) {
+      return "rgba(40, 167, 69, 0.7)";
+    }
+
+    if (+rating < 4 && +rating > 3 >= 4) {
+      return "rgba(232, 176, 8, 0.7)";
+    }
+
+    if (+rating <= 3) {
+      return "rgba(255, 0, 0, 0.7)";
+    }
+
+    return "rgba(40, 167, 69, 0.7)";
+  };
+
+  onItemPress = id => {
+    alert("Press: " + id);
+  };
+
+  onLike = id => {
+    this.setState((prevState, nextProps) => {
+      return {
+        isLiked: !prevState.isLiked
+      };
+    });
+  };
+
+  onAddBackpack = id => {
+    alert("ADD: " + id);
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const {
+      item
+    } = nextProps;
+
+    return { ...prevState, item };
   }
 
   render() {
-    const {
-      props
-    } = this;
+    const { props } = this;
 
     const {
       id,
@@ -41,54 +79,26 @@ class RestaurantCard extends React.PureComponent {
       currency
     } = props.item;
 
-    getRatingColor = (rating) => {
-      if (+rating >= 4) {
-        return 'rgba(40, 167, 69, 0.7)';
-      }
-      
-      if (+rating < 4 && +rating > 3 >= 4) {
-        return 'rgba(232, 176, 8, 0.7)';
-      }
-      
-      if (+rating <= 3) {
-        return 'rgba(255, 0, 0, 0.7)';
-      }
-
-      return 'rgba(40, 167, 69, 0.7)';
-    }
-
-    onItemPress = id => {
-      alert("Press: " + id);
-    }
-
-    onLike = id => {
-      this.setState((prevState, nextProps) => {
-        return {
-          isLiked: !prevState.isLiked
-        }
-      })
-    }
-
-    onAddBackpack = id => {
-      alert("ADD: " + id);
-    };
-
     const success = +rating >= 4 ? true : false;
     const warning = +rating < 4 && +rating > 3 ? true : false;
     const danger = +rating <= 3 ? true : false;
+    const restaurantType = cuisines.split(",")[0].substr(0, 10);
 
-    return <TouchableHighlight onPress={() => onItemPress(id)}>
+    return <TouchableHighlight onPress={() => this.onItemPress(id)}>
         <RCard>
           <RFeaturedWrapper>
-            <FullWidthImage ratio={3 / 4} source={{ uri: image }} />
-            <RInfoWrapper bgColor={getRatingColor(rating)}>
-              <RBeforeInfo bgColor={getRatingColor(rating)} />
-              <RType>{cuisines.split(',')[0]}</RType>
-              <RAfterInfo bgColor={getRatingColor(rating)} />
-            </RInfoWrapper>
-
+            <FullWidthImage ratio={3 / 4} style={{ minHeight: 250 }} source={{ uri: image }} />
+            
+            { cuisines.length > 0 &&
+              <RInfoWrapper bgColor={this.getRatingColor(rating)}>
+                <RBeforeInfo bgColor={this.getRatingColor(rating)} />
+                <RType>{restaurantType}</RType>
+                <RAfterInfo bgColor={this.getRatingColor(rating)} />
+              </RInfoWrapper>
+            }
+            
             <View style={{ position: "absolute", right: 15, top: 20 }}>
-              <TouchableHighlight onPress={() => onLike(id)}>
+              <TouchableHighlight onPress={() => this.onLike(id)}>
                 <Icon name="md-heart" style={{ color: this.state.isLiked ? "crimson" : "#fff" }} />
               </TouchableHighlight>
             </View>
@@ -96,7 +106,7 @@ class RestaurantCard extends React.PureComponent {
             <RTitleWrapper>
               <RTitle>{name}</RTitle>
               <RSubtitleWrapper>
-                <View style={{ alignSelf: 'flex-end', justifyContent:'center', backgroundColor: `${getRatingColor(rating)}`, borderRadius: 50, width: 30, height: 30 }}>
+                <View style={{ alignSelf: "flex-end", justifyContent: "center", backgroundColor: `${this.getRatingColor(rating)}`, borderRadius: 50, width: 30, height: 30 }}>
                   <RSubtitle>{rating}</RSubtitle>
                 </View>
               </RSubtitleWrapper>
@@ -128,7 +138,7 @@ RestaurantCard.propTypes = {
     name: PropTypes.string.isRequired,
     location: PropTypes.string,
     city: PropTypes.string,
-    // rating: PropTypes.string,
+    rating: PropTypes.string,
     cuisines: PropTypes.string,
     cost: PropTypes.string,
     currency: PropTypes.string
@@ -142,7 +152,7 @@ RestaurantCard.defaultProps = {
     name: 'Jakarta Delights',
     location: 'Jakarta Barat',
     city: 'DKI Jakarta',
-    // rating: '4.5',
+    rating: '4.5',
     cuisines: 'Restaurant',
     cost: '50',
     currency: '$'
