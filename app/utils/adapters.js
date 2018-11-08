@@ -10,8 +10,7 @@ export const ZomatoRestaurantSearch = ({ restaurants: data }) => {
         cuisines,
         average_cost_for_two,
         currency,
-        thumb,
-        photos_url
+        thumb
       }
     }) => {
       return {
@@ -23,7 +22,7 @@ export const ZomatoRestaurantSearch = ({ restaurants: data }) => {
         city: cityDt,
         rating: ratingDt,
         cuisines,
-        cost: average_cost_for_two,
+        cost: `${average_cost_for_two}`,
         currency
       };
     }

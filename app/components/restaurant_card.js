@@ -83,7 +83,7 @@ class RestaurantCard extends React.PureComponent {
             <FullWidthImage ratio={3 / 4} source={{ uri: image }} />
             <RInfoWrapper bgColor={getRatingColor(rating)}>
               <RBeforeInfo bgColor={getRatingColor(rating)} />
-              <RType>{cuisines}</RType>
+              <RType>{cuisines.split(',')[0]}</RType>
               <RAfterInfo bgColor={getRatingColor(rating)} />
             </RInfoWrapper>
 
@@ -128,7 +128,7 @@ RestaurantCard.propTypes = {
     name: PropTypes.string.isRequired,
     location: PropTypes.string,
     city: PropTypes.string,
-    rating: PropTypes.string,
+    // rating: PropTypes.string,
     cuisines: PropTypes.string,
     cost: PropTypes.string,
     currency: PropTypes.string
@@ -142,7 +142,7 @@ RestaurantCard.defaultProps = {
     name: 'Jakarta Delights',
     location: 'Jakarta Barat',
     city: 'DKI Jakarta',
-    rating: '4.5',
+    // rating: '4.5',
     cuisines: 'Restaurant',
     cost: '50',
     currency: '$'
